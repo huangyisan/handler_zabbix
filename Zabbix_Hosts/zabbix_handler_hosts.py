@@ -1,30 +1,11 @@
-from Zabbix_JSRPC import zabbix_jsrpc_query
-from Zabbix_Login.zabbix_handler_login import ZabbixLogin
-import requests
-import json
+from Zabbix_JSRPC.zabbix_jsrpc_query import JSRPCQuery
+from Zabbix_Payloads import zabbix_hosts_info
 
+class ZabbixHosts(JSRPCQuery):
 
+    def get_all_hosts(self,payload):
+        return self.zabbix_jsrpc_query(payload).get("result","")
 
-class ZabbixHosts(object):
-    def __init__(self):
-        pass
-
-    def get_hosts(self):
-        payload = {
-            "jsonrpc": "2.0",
-            "method": "host.get",
-            "params": {
-                "filter": {
-                    "host": [
-                        "Zabbix server",
-                        "Linux server"
-                    ]
-                }
-            },
-            "auth": "{0}".format(ZabbixLogin().get_token()),
-            "id": 1
-        }
-        return payload
-
+    def 
 c = ZabbixHosts()
-print(c.get_hosts())
+print(c.get_all_hosts(payload=zabbix_hosts_info.all_hosts_payload))
