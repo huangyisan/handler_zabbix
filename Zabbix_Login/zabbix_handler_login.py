@@ -1,15 +1,7 @@
-from zabbix_jsrpc_query import JSRPCQuery
-from login_info import payload
-import requests
-import json
+from Zabbix_JSRPC.zabbix_jsrpc_query import JSRPCQuery
+from Zabbix_Payloads import zabbix_auth_info
 
 class ZabbixLogin(JSRPCQuery):
 
-    def zabbix_jsrpc_query(self, payload):
-        payload = json.dumps(payload).encode('utf-8')
-        r = requests.post(url=self.jsrpc_url, data=payload, headers=self.header)
-        return r.json()
-
-    def get_token(self,payload=payload):
+    def get_token(self,payload=zabbix_auth_info.auth_payload):
         return self.zabbix_jsrpc_query(payload).get('result')
-

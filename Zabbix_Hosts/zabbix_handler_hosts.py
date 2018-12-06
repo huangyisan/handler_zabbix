@@ -1,10 +1,11 @@
-from zabbix_handler_login import ZBXLogin
+from Zabbix_JSRPC import zabbix_jsrpc_query
+from Zabbix_Login.zabbix_handler_login import ZabbixLogin
 import requests
 import json
 
 
 
-class ZBXHosts(object):
+class ZabbixHosts(object):
     def __init__(self):
         pass
 
@@ -20,10 +21,10 @@ class ZBXHosts(object):
                     ]
                 }
             },
-            "auth": "{0}".format(ZBXLogin().get_token()),
+            "auth": "{0}".format(ZabbixLogin().get_token()),
             "id": 1
         }
+        return payload
 
-
-c = ZBXHosts()
+c = ZabbixHosts()
 print(c.get_hosts())
