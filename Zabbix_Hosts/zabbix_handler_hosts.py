@@ -6,6 +6,6 @@ class ZabbixHosts(JSRPCQuery):
     def get_all_hosts(self,payload):
         return self.zabbix_jsrpc_query(payload).get("result","")
 
-    def 
+
 c = ZabbixHosts()
 print(c.get_all_hosts(payload=zabbix_hosts_info.all_hosts_payload))
