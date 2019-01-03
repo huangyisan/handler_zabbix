@@ -4,6 +4,7 @@ all_alerts_payload = {
     "jsonrpc": "2.0",
     "method": "trigger.get",
     "params": {
+        "countOutput":"True",
         "output": [
             "triggerid",
             "description",
@@ -12,8 +13,10 @@ all_alerts_payload = {
     "filter": {
             "value": 1
               },
-     "only_true": 4,
-"selectHosts": ['host'],
+    "selectHosts": ['host'],
+    "monitored":"True",
+    "active":"True",
+    "maintenance":"False",
     },
     "auth": "{0}".format(ZabbixLogin().get_token()),
     "id": 1
