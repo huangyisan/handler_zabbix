@@ -6,7 +6,7 @@ VALID_STATUS_BOOLEAN = {0, 1}
 class ZabbixTrigger(JSRPCQuery):
 
     # 获取当前告警信息数量
-    def get_count_trigger(self,maintenance):
+    def get_count_trigger(self,maintenance=0):
         '''
 
         :param maintenance: 1 只显示维护  0 不显示维护
@@ -19,7 +19,7 @@ class ZabbixTrigger(JSRPCQuery):
         return self.zabbix_jsrpc_query(payload).get("result","")
 
     # 获取详细告警信息
-    def get_detail_trigger(self,maintenance):
+    def get_detail_trigger(self,maintenance=0):
         '''
 
         :param maintenance:  1 只显示维护  0 不显示维护
@@ -32,5 +32,5 @@ class ZabbixTrigger(JSRPCQuery):
         return self.zabbix_jsrpc_query(payload).get("result","")
 
 c = ZabbixTrigger()
-print(c.get_count_trigger(maintenance=0))
-print(c.get_detail_trigger(maintenance=0))
+print(c.get_count_trigger())
+print(c.get_detail_trigger())
