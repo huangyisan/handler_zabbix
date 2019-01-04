@@ -1,6 +1,6 @@
 from Zabbix_Login.zabbix_handler_login import ZabbixLogin
 
-all_alerts_payload = {
+count_alerts_payload = {
     "jsonrpc": "2.0",
     "method": "trigger.get",
     "params": {

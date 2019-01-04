@@ -8,4 +8,4 @@ class ZabbixTrigger(JSRPCQuery):
 
 
 c = ZabbixTrigger()
-print(c.get_count_trigger(payload=zabbix_triggers_info.all_alerts_payload))
+print(c.get_count_trigger(payload=zabbix_triggers_info.count_alerts_payload))
