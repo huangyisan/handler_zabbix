@@ -1,3 +1,9 @@
-# handler_zabbix
+Handler_zabbix: zabbix api function
+=========================================
+**打算写一个zabbix api的sdk工具**
 
-## Zabbix_Alert
+Feature Support
+---------------
+
+- login
+
