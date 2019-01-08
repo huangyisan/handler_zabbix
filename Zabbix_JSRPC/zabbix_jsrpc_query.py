@@ -1,6 +1,7 @@
 from Zabbix_Payloads import zabbix_auth_info
 import requests
 import json
+import sys
 
 
 class JSRPCQuery(object):
@@ -13,8 +14,13 @@ class JSRPCQuery(object):
 
     def zabbix_jsrpc_query(self, payload):
         payload = json.dumps(payload).encode('utf-8')
-        r = requests.post(url=self.jsrpc_url, data=payload, headers=self.header)
+        try:
+            r = requests.post(url=self.jsrpc_url, data=payload, headers=self.header, timeout=(0.5, 5))
+
+        except requests.exceptions.ConnectTimeout:
+            print("Request {0} timeout!".format(self.jsrpc_url))
+            sys.exit(1)
+        except requests.exceptions.ReadTimeout:
+            print("Receive data from {0} timeout".format(self.jsrpc_url))
+            sys.exit(1)
         return r.json()
-
-
-
