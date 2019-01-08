@@ -1,14 +1,14 @@
 from Zabbix_Login.zabbix_handler_login import ZabbixLogin
 
-def get_templast_payload():
+def get_templast_payload(templatename):
     get_template_payload = {
         "jsonrpc": "2.0",
         "method": "template.get",
         "params": {
-            "output": "extend",
+            "output": ["templateid"],
             "filter": {
                 "host": [
-                    "Flume_Process_Running_Check",
+                    templatename,
                 ]
             }
         },

@@ -18,4 +18,5 @@ for i in hosts:
 hosts_list = [{'hostid':i} for i in hostsid]
 
 mass_template = ZabbixTemplates()
-mass_template.mass_add_templates(templateid=, hosts_list=hosts_list)
+mass_template.mass_add_templates(templatename="Flume_Process_Running_Check", hosts_list=hosts_list)
+
