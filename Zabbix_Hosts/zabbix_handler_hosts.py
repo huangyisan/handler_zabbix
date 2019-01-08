@@ -26,7 +26,11 @@ class ZabbixHosts(JSRPCQuery):
         payload = zabbix_hosts_info.get_customer_hosts_payload(output_data, **kwargs)
         return self.get_all_hosts(payload)
 
-# c = ZabbixHosts()
-# output_data = ["hostid","host"]
-# kwargs = {}
-# print(c.get_customer_hosts(avaliable=1))
+
+'''
+Example:
+c = ZabbixHosts()
+output_data = ["hostid","host"]
+kwargs = {}
+print(c.get_customer_hosts(avaliable=1))
+'''

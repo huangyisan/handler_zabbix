@@ -23,8 +23,4 @@ class JSRPCQuery(object):
         except requests.exceptions.ReadTimeout:
             print("Receive data from {0} timeout".format(self.jsrpc_url))
             sys.exit(1)
-        result = r.json()
-        if result.get('error'):
-            print("Login Failed!")
-            sys.exit(1)
         return r.json()
