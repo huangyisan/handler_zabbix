@@ -1,8 +1,7 @@
 authinfo = {
     'username': 'Admin',
-    'password': 'admin',
+    'password': '',
     'url': 'http://10.1.18.1/zabbix/'
-
 }
 
 auth_payload = {
