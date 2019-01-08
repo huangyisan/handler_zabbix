@@ -4,18 +4,29 @@ from Zabbix_Payloads import zabbix_hosts_info
 
 class ZabbixHosts(JSRPCQuery):
 
-    def get_all_hosts(self,payload):
+    _output_data = ["hostid","host"]
+
+
+    def get_all_hosts(self,payload=zabbix_hosts_info.get_all_hosts_payload()):
+        '''
+        
+        :param payload: default all
+        :return: list
+        '''
         return self.zabbix_jsrpc_query(payload).get("result","")
 
-    def get_customer_info(self,output_data):
+    def get_customer_hosts(self,output_data=_output_data, **kwargs):
+        '''
+        
+        :param output_data: default hostid and host.
+        :param kwargs:  Return only those results that exactly match the given. hostid=10084
+        :return: list
         '''
 
-        :param output_data: 自定义要输出的内容
-        :return:
-        '''
-        payload = zabbix_hosts_info.get_all_hosts_payload(output_data)
+        payload = zabbix_hosts_info.get_customer_hosts_payload(output_data, **kwargs)
         return self.get_all_hosts(payload)
 
 # c = ZabbixHosts()
 # output_data = ["hostid","host"]
-# print(c.get_custmer_info(output_data=output_data))
+# kwargs = {}
+# print(c.get_customer_hosts(avaliable=1))
