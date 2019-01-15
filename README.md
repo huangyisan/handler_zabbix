@@ -15,9 +15,6 @@ output:
 
 - 自定义获取hosts数据 `get_customer_hosts`
 
-`output_data` 输出内容
-
-`kv` 过滤内容
 ```
 zabbix_hosts = ZabbixHosts()
 output_data = ["hostid","host"]
