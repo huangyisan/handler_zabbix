@@ -15,7 +15,8 @@ class ZabbixLogin(JSRPCQuery):
 
     def get_token(self):
 
-        _select_token_table_sql = '''SELECT count(*) FROM sqlite_master WHERE type='table' AND name=\'{TABLE_NAME}\';'''.format(TABLE_NAME=Sqlite().get_db_name)
+        _select_token_table_sql = '''SELECT count(*) FROM sqlite_master WHERE type='table' AND name=\'{TABLE_NAME}\';'''.format(TABLE_NAME=Sqlite().get_table_name)
+        print(_select_token_table_sql)
         _create_table_sql = '''CREATE TABLE TOKEN (ID INT PRIMARY KEY NOT NULL, TOKEN TEXT NOT NULL);'''
         _insert_token_sql = '''INSERT INTO TOKEN (ID,TOKEN) VALUES (1, \'{TOKEN}\')'''.format(TOKEN=self.get_token_via_api())
         _select_token_sql = '''SELECT TOKEN from TOKEN'''

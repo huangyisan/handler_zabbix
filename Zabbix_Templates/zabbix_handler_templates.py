@@ -11,7 +11,15 @@ class ZabbixTemplates(JSRPCQuery):
 
     # 批量添加模板，和hosts关联
     def mass_add_templates(self,templatename, hosts_list):
+        '''
+        
+        :param templatename: 
+        :param hosts_list:   hosts_list = [{'hostid': '10423'}, {'hostid': '10433'}]
+        :return: 
+        '''
         templateid = self.get_template_id(templatename)
         payload = zabbix_templates_info.mass_add_templates_hosts_payload(templateid, hosts_list)
         return self.zabbix_jsrpc_query(payload).get("result","")
 
+template = ZabbixTemplates()
+print(template.get_template_id(templatename='Flume_Process_Running_Check'))

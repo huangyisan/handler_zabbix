@@ -1,16 +1,17 @@
 import sqlite3
-import os
-import sys
 
 class Sqlite(object):
     def __init__(self):
-        self.path = os.path.abspath(sys.argv[0])
-        print(self.path)
         self._db = 'token.db'
+        self._table = 'token'
 
     @property
     def get_db_name(self):
         return self._db.upper()
+
+    @property
+    def get_table_name(self):
+        return self._table.upper()
 
     def sqlite_conn(self):
         conn = sqlite3.connect(self.get_db_name)
