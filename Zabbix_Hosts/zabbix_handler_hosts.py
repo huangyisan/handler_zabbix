@@ -6,14 +6,23 @@ class ZabbixHosts(JSRPCQuery):
 
     _output_data = ["hostid","host"]
 
+    def _get_hosts(self,payload):
+        '''
 
-    def get_all_hosts(self,payload=zabbix_hosts_info.get_all_hosts_payload()):
+        :param payload: 通用方法
+        :return:
+        '''
+        return self.zabbix_jsrpc_query(payload).get("result","")
+
+
+    def get_all_hosts(self):
         '''
         
         :param payload: default all
         :return: list
         '''
-        return self.zabbix_jsrpc_query(payload).get("result","")
+        payload = zabbix_hosts_info.get_all_hosts_payload()
+        return self._get_hosts(payload).get("result","")
 
     def get_customer_hosts(self,output_data=_output_data, **kwargs):
         '''
@@ -24,13 +33,11 @@ class ZabbixHosts(JSRPCQuery):
         '''
 
         payload = zabbix_hosts_info.get_customer_hosts_payload(output_data, **kwargs)
-        return self.get_all_hosts(payload)
+        return self._get_hosts(payload)
 
 
-'''
-Example:
-c = ZabbixHosts()
-output_data = ["hostid","host"]
-kwargs = {}
-print(c.get_customer_hosts(avaliable=1))
-'''
+# Example:
+# c = ZabbixHosts()
+# output_data = ["hostid","host"]
+# kwargs = {}
+# print(c.get_customer_hosts(avaliable=1))
