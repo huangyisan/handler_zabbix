@@ -1,6 +1,6 @@
 authinfo = {
     'username': 'Admin',
-    'password': '!',
+    'password': '!1',
     'url': 'http://1.1.1.1/zabbix/',
     # 'url': 'http://ip/zabbix/'
 }
