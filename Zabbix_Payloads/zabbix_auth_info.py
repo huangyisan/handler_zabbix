@@ -1,7 +1,8 @@
+import password
 authinfo = {
     'username': 'Admin',
-    'password': '!',
-    'url': 'http://1.1.1.1/zabbix/',
+    'password': password.password,
+    'url': 'http://{0}/zabbix/'.format(password.ip),
 }
 
 auth_payload = {
