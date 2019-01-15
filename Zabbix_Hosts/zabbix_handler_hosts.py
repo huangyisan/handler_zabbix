@@ -17,7 +17,7 @@ class ZabbixHosts(JSRPCQuery):
 
     def get_all_hosts(self):
         '''
-        
+
         :param payload: default all
         :return: list
         '''
@@ -26,7 +26,7 @@ class ZabbixHosts(JSRPCQuery):
 
     def get_customer_hosts(self,output_data=_output_data, **kwargs):
         '''
-        
+
         :param output_data: default hostid and host.
         :param kwargs:  Return only those results that exactly match the given. hostid=10084
         :return: list
