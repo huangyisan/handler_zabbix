@@ -1,7 +1,11 @@
 import sqlite3
+import os
+import sys
 
 class Sqlite(object):
     def __init__(self):
+        self.path = os.path.abspath(sys.argv[0])
+        print(self.path)
         self._db = 'token.db'
 
     @property
@@ -29,3 +33,4 @@ class Sqlite(object):
         return conn.close()
 
 
+a = Sqlite()

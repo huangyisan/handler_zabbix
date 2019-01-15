@@ -32,6 +32,3 @@ class ZabbixLogin(JSRPCQuery):
         token = token_sqlite.sqlite_select(conn=conn, sql=_select_token_sql)
         token_sqlite.sqlite_close(conn)
         return token
-
-a = ZabbixLogin()
-print(a.get_token())

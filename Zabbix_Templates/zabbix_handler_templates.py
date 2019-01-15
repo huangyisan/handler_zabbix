@@ -6,7 +6,7 @@ class ZabbixTemplates(JSRPCQuery):
 
     # 获取templateid
     def get_template_id(self,templatename):
-        payload = zabbix_templates_info.get_templast_payload(templatename)
+        payload = zabbix_templates_info.get_template_payload(templatename)
         return self.zabbix_jsrpc_query(payload).get("result", "")[0].get('templateid')
 
     # 批量添加模板，和hosts关联
