@@ -1,6 +1,6 @@
 from Zabbix_Login.zabbix_handler_login import ZabbixLogin
 
-def get_templast_payload(templatename):
+def get_template_payload(templatename):
     get_template_payload = {
         "jsonrpc": "2.0",
         "method": "template.get",
