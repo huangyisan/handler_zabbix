@@ -14,7 +14,6 @@ class ZabbixHosts(JSRPCQuery):
         '''
         return self.zabbix_jsrpc_query(payload).get("result","")
 
-
     def get_all_hosts(self):
         '''
 
@@ -22,7 +21,7 @@ class ZabbixHosts(JSRPCQuery):
         :return: list
         '''
         payload = zabbix_hosts_info.get_all_hosts_payload()
-        return self._get_hosts(payload).get("result","")
+        return self._get_hosts(payload)
 
     def get_customer_hosts(self,output_data=_output_data, **kwargs):
         '''
@@ -35,9 +34,3 @@ class ZabbixHosts(JSRPCQuery):
         payload = zabbix_hosts_info.get_customer_hosts_payload(output_data, **kwargs)
         return self._get_hosts(payload)
 
-
-# Example:
-# c = ZabbixHosts()
-# output_data = ["hostid","host"]
-# kwargs = {}
-# print(c.get_customer_hosts(avaliable=1))

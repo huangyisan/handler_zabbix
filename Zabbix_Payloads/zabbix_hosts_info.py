@@ -33,4 +33,5 @@ def get_customer_hosts_payload(output_data,**kwargs):
         "auth": "{0}".format(ZabbixLogin().get_token()),
         "id": 1
     }
+    print(get_customer_hosts_payload)
     return get_customer_hosts_payload
