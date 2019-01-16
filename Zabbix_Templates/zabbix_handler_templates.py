@@ -20,6 +20,3 @@ class ZabbixTemplates(JSRPCQuery):
         templateid = self.get_template_id(templatename)
         payload = zabbix_templates_info.mass_add_templates_hosts_payload(templateid, hosts_list)
         return self.zabbix_jsrpc_query(payload).get("result","")
-
-template = ZabbixTemplates()
-print(template.get_template_id(templatename='Flume_Process_Running_Check'))
