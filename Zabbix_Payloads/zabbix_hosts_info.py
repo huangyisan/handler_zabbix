@@ -27,6 +27,7 @@ def get_customer_hosts_payload(output_data,**kwargs):
         "jsonrpc": "2.0",
         "method": "host.get",
         "params": {
+
             "output": output_data,
             "filter": kwargs
         },

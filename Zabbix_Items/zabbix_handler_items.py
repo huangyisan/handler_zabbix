@@ -12,5 +12,13 @@ class ZabbixItems(JSRPCQuery):
         payload = zabbix_items_info.get_customer_items_payload(output_data, **kwargs)
         return self._get_items(payload)
 
+    def search_customer_items(self,selecthosts, searchwildcardsenabled="false", searchbyany="false", output_data=_output_data,**kwargs):
+
+        payload = zabbix_items_info.search_items_payload(selecthosts, searchwildcardsenabled, searchbyany,output_data, **kwargs)
+        return self._get_items(payload)
+
 a = ZabbixItems()
-print(a.get_customer_items())
+output_data = ["hostid",'name','lastvalue']
+hostid = [10638,10640]
+name = ["Interface Eth-Trunk1(To-charge_cucc_beijing_sjqlt_01): Bits received","Interface Eth-Trunk10(To-charge_ctcc_fujian_qzdx_01): Bits received"]
+print(a.get_customer_items(output_data=output_data,hostid=hostid))
