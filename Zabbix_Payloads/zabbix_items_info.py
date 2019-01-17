@@ -1,6 +1,6 @@
 from Zabbix_Login.zabbix_handler_login import ZabbixLogin
 
-def get_customer_items_payload(output_data,**kwargs):
+def get_customer_items_payload(output_data,visiable, **kwargs):
     get_customer_items_payload = {
         "jsonrpc": "2.0",
         "method": "item.get",
@@ -17,9 +17,13 @@ def get_customer_items_payload(output_data,**kwargs):
         "auth": "{0}".format(ZabbixLogin().get_token()),
         "id": 1
     }
+
+    if visiable:
+        print("The payload is:\n" + "{0}".format(get_customer_items_payload))
+
     return get_customer_items_payload
 
-def search_items_payload(selecthosts, searchwildcardsenabled, searchbyany,output_data,**kwargs):
+def search_items_payload(selecthosts, searchwildcardsenabled, searchbyany,output_data, visiable,**kwargs):
     '''
 
     :param selecthosts:
@@ -43,4 +47,8 @@ def search_items_payload(selecthosts, searchwildcardsenabled, searchbyany,output
         "auth": "{0}".format(ZabbixLogin().get_token()),
         "id": 1
     }
+
+    if visiable:
+        print("The payload is:\n" + "{0}".format(search_items_payload))
+
     return search_items_payload
