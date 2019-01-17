@@ -17,7 +17,8 @@ def get_all_hosts_payload():
     }
     return get_all_hosts_payload
 
-def get_customer_hosts_payload(output_data,**kwargs):
+
+def get_customer_hosts_payload(visiable,output_data,**kwargs):
     '''
 
     :param output_data: 需要回写的数据
@@ -34,5 +35,6 @@ def get_customer_hosts_payload(output_data,**kwargs):
         "auth": "{0}".format(ZabbixLogin().get_token()),
         "id": 1
     }
-    print(get_customer_hosts_payload)
+    if visiable == True:
+        print(get_customer_hosts_payload)
     return get_customer_hosts_payload
