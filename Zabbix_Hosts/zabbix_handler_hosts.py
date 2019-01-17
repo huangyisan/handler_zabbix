@@ -33,4 +33,8 @@ class ZabbixHosts(JSRPCQuery):
 
         payload = zabbix_hosts_info.get_customer_hosts_payload(output_data, **kwargs)
         return self._get_hosts(payload)
-
+zabbix_hosts = ZabbixHosts()
+# output_data = ["hostid","host"]
+output_data = "extend"
+host = ["FuJian-QZDX-Gateway","BeiJing-TZLT-Gateway"]
+print(zabbix_hosts.get_customer_hosts(output_data=output_data,host=host))
