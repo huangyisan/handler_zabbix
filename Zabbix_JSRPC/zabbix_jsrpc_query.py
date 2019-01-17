@@ -16,7 +16,7 @@ class JSRPCQuery(object):
 
         payload = json.dumps(payload).encode('utf-8')
         try:
-            r = requests.post(url=self.jsrpc_url, data=payload, headers=self.header, timeout=(0.5, 50))
+            r = requests.post(url=self.jsrpc_url, data=payload, headers=self.header, timeout=(0.5, 5))
         except requests.exceptions.ConnectTimeout:
             print("Request {0} timeout!".format(self.jsrpc_url))
             sys.exit(1)
