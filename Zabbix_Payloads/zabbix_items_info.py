@@ -1,16 +1,11 @@
 from Zabbix_Login.zabbix_handler_login import ZabbixLogin
 
-def get_customer_items_payload(output_data,visiable, **kwargs):
+def get_customer_items_payload(output_data,host,visiable, **kwargs):
     get_customer_items_payload = {
         "jsonrpc": "2.0",
         "method": "item.get",
-
         "params": {
-            'selectHosts': ['hostids', 'proxy_hostid'],
-            "search":{"name":['*To-charge_cucc_beijing_sjqlt_01*Bits received',"*To-charge_ctcc_fujian_qzdx_01*Bits received"]},
-            "searchWildcardsEnabled":"true",
-            "searchByAny":"true",
-            # "hostids": "10638",
+            "host": host,
             "output": output_data,
             "filter": kwargs
         },
