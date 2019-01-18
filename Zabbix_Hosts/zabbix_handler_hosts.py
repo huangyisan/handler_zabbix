@@ -1,8 +1,6 @@
 from Zabbix_JSRPC.zabbix_jsrpc_query import JSRPCQuery
 from Zabbix_Payloads import zabbix_hosts_info
 
-
-
 class ZabbixHosts(JSRPCQuery):
     _output_data = ["hostid", "host"]
 
@@ -41,7 +39,7 @@ class ZabbixHosts(JSRPCQuery):
         if not limit:
             limit = 50
 
-        payload = zabbix_hosts_info.get_customer_hosts_payload(limit, proxy_hosts, monitored_hosts, output_data,
+        payload = zabbix_hosts_info.get_customer_hosts_payload(limit=limit, proxy_hosts=proxy_hosts, monitored_hosts=monitored_hosts, output_data=output_data,
                                                                    **kwargs)
         if visiable:
             print("The payload is:\n" + "{0}".format(payload))

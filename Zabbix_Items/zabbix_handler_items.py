@@ -16,7 +16,8 @@ class ZabbixItems(JSRPCQuery):
 
     def search_customer_items(self,selecthosts="false", searchwildcardsenabled="false", searchbyany="false", output_data=_output_data,visiable=None, **kwargs):
 
-        payload = zabbix_items_info.search_items_payload(selecthosts, searchwildcardsenabled, searchbyany,output_data,visiable, **kwargs)
+        payload = zabbix_items_info.search_items_payload(selecthosts=selecthosts, searchwildcardsenabled=searchwildcardsenabled, \
+                                                         searchbyany=searchbyany,output_data=output_data,visiable=visiable, **kwargs)
         if visiable:
             print("The payload is:\n" + "{0}".format(payload))
         return self._get_items(payload)
