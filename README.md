@@ -53,6 +53,40 @@ None
 
 Feature Support
 ---------------
+- hosts
+    - 新增host，单个或者多个
+    - 删除host，单个或者多个
+    - 修改host，单个或者批量
+    - 查询host，单个或者多个
 
-- hosts list
+- host group
+    - 新增host group，单个或者多个
+    - 删除host group，单个或者多个
+    - 修改host group，单个或者批量
+    - 查询host group，单个或者多个
+
+- items
+    - 新增item
+    - 删除item
+    - 修改item
+    - 查询item
+
+- trigger
+    - 新增trigger
+    - 删除trigger
+    - 删除trigger依赖关系
+    - 修改trigger
+    - 查询trigger
+    
+- alert
+    - 查询alert
+    
+- screen
+    - 新增screen
+    - 删除screen
+    - 修改screen
+    - 查询screen
+    
+
+
 
