@@ -11,6 +11,7 @@ def get_all_hosts_payload(visiable):
         "method": "host.get",
         "params": {
             "output": "extend",
+
         },
         "auth": "{0}".format(ZabbixLogin().get_token()),
         "id": 1
@@ -18,19 +19,16 @@ def get_all_hosts_payload(visiable):
     return get_all_hosts_payload
 
 
-def get_customer_hosts_payload(proxy_hosts,monitored_hosts,output_data,**kwargs):
-    '''
+def get_customer_hosts_payload(limit,proxy_hosts,monitored_hosts,output_data,**kwargs):
 
-    :param output_data: 需要回写的数据
-    :return:
-    '''
     get_customer_hosts_payload = {
         "jsonrpc": "2.0",
         "method": "host.get",
 
         "params": {
             "output": output_data,
-            "filter": kwargs
+            "filter": kwargs,
+            "limit":limit
         },
         "auth": "{0}".format(ZabbixLogin().get_token()),
         "id": 1
@@ -44,7 +42,8 @@ def get_customer_hosts_payload(proxy_hosts,monitored_hosts,output_data,**kwargs)
         "params": {
             "proxy_hosts":"true",
             "output": output_data,
-            "filter": kwargs
+            "filter": kwargs,
+            "limit":limit
         },
         "auth": "{0}".format(ZabbixLogin().get_token()),
         "id": 1
@@ -57,7 +56,8 @@ def get_customer_hosts_payload(proxy_hosts,monitored_hosts,output_data,**kwargs)
         "params": {
             "monitored_hosts":monitored_hosts,
             "output": output_data,
-            "filter": kwargs
+            "filter": kwargs,
+            "limit":limit
 
         },
         "auth": "{0}".format(ZabbixLogin().get_token()),
