@@ -53,40 +53,38 @@ None
 
 Feature Support
 ---------------
-- hosts
-    - 新增host，单个或者多个
-    - 删除host，单个或者多个
-    - 修改host，单个或者批量
-    - 查询host，单个或者多个
+- hosts  (doing)
+    - 新增host，单个或者多个 (undo)
+    - 删除host，单个或者多个 (undo)
+    - 修改host，单个或者批量 (undo)
+    - 查询host，单个或者多个 (doing)
+        - 根据host名称查询，精确或者通配
+        - 能返回需要的数据，比如返回hostid，ip等属性
 
-- host group
+- host group (undo)
     - 新增host group，单个或者多个
     - 删除host group，单个或者多个
     - 修改host group，单个或者批量
     - 查询host group，单个或者多个
 
-- items
+- items (undo)
     - 新增item
     - 删除item
     - 修改item
     - 查询item
 
-- trigger
+- trigger (undo)
     - 新增trigger
     - 删除trigger
     - 删除trigger依赖关系
     - 修改trigger
     - 查询trigger
     
-- alert
+- alert (undo)
     - 查询alert
     
-- screen
+- screen (undo)
     - 新增screen
     - 删除screen
     - 修改screen
     - 查询screen
-    
-
-
-
