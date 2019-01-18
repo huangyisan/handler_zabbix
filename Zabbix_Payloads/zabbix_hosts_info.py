@@ -19,7 +19,7 @@ def get_all_hosts_payload(visiable):
     return get_all_hosts_payload
 
 
-def get_customer_hosts_payload(limit,proxy_hosts,monitored_hosts,output_data,**kwargs):
+def get_customer_hosts_payload(limit, proxy_hosts, monitored_hosts, output_data, **kwargs):
 
     get_customer_hosts_payload = {
         "jsonrpc": "2.0",
@@ -28,7 +28,8 @@ def get_customer_hosts_payload(limit,proxy_hosts,monitored_hosts,output_data,**k
         "params": {
             "output": output_data,
             "filter": kwargs,
-            "limit":limit
+            "limit":limit,
+
         },
         "auth": "{0}".format(ZabbixLogin().get_token()),
         "id": 1
@@ -57,7 +58,7 @@ def get_customer_hosts_payload(limit,proxy_hosts,monitored_hosts,output_data,**k
             "monitored_hosts":monitored_hosts,
             "output": output_data,
             "filter": kwargs,
-            "limit":limit
+            "limit":limit,
 
         },
         "auth": "{0}".format(ZabbixLogin().get_token()),

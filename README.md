@@ -62,9 +62,10 @@ Feature Support
         - 根据host名称查询，精确或者通配
         - 能返回需要的数据，比如返回hostid，ip等属性
     - 过滤host，根据条件过滤
-        - 一般过滤 (done)
-        - 
-
+        - 只返回proxy_hosts节点
+        - 只返回监控状态服务器
+        - 限定输出条目
+        
 - host group (undo)
     - 新增host group，单个或者多个
     - 删除host group，单个或者多个
