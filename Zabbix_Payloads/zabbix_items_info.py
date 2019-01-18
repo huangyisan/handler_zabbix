@@ -13,9 +13,6 @@ def get_customer_items_payload(output_data,host,visiable, **kwargs):
         "id": 1
     }
 
-    if visiable:
-        print("The payload is:\n" + "{0}".format(get_customer_items_payload))
-
     return get_customer_items_payload
 
 def search_items_payload(selecthosts, searchwildcardsenabled, searchbyany,output_data, visiable,**kwargs):
@@ -42,8 +39,5 @@ def search_items_payload(selecthosts, searchwildcardsenabled, searchbyany,output
         "auth": "{0}".format(ZabbixLogin().get_token()),
         "id": 1
     }
-
-    if visiable:
-        print("The payload is:\n" + "{0}".format(search_items_payload))
 
     return search_items_payload

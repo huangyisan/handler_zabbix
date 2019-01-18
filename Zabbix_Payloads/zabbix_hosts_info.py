@@ -15,13 +15,10 @@ def get_all_hosts_payload(visiable):
         "auth": "{0}".format(ZabbixLogin().get_token()),
         "id": 1
     }
-    if visiable:
-        print("The payload is:\n" + "{0}".format(get_all_hosts_payload))
-
     return get_all_hosts_payload
 
 
-def get_customer_hosts_payload(output_data,visiable,**kwargs):
+def get_customer_hosts_payload(proxy_hosts,monitored_hosts,output_data,**kwargs):
     '''
 
     :param output_data: 需要回写的数据
@@ -30,6 +27,7 @@ def get_customer_hosts_payload(output_data,visiable,**kwargs):
     get_customer_hosts_payload = {
         "jsonrpc": "2.0",
         "method": "host.get",
+
         "params": {
             "output": output_data,
             "filter": kwargs
@@ -38,7 +36,35 @@ def get_customer_hosts_payload(output_data,visiable,**kwargs):
         "id": 1
     }
 
-    if visiable:
-        print("The payload is:\n" + "{0}".format(get_customer_hosts_payload))
 
+    get_proxy_hosts_payload = {
+        "jsonrpc": "2.0",
+        "method": "host.get",
+
+        "params": {
+            "proxy_hosts":"true",
+            "output": output_data,
+            "filter": kwargs
+        },
+        "auth": "{0}".format(ZabbixLogin().get_token()),
+        "id": 1
+    }
+
+    monitored_hosts_payload = {
+        "jsonrpc": "2.0",
+        "method": "host.get",
+
+        "params": {
+            "monitored_hosts":monitored_hosts,
+            "output": output_data,
+            "filter": kwargs
+
+        },
+        "auth": "{0}".format(ZabbixLogin().get_token()),
+        "id": 1
+    }
+    if proxy_hosts:
+        return get_proxy_hosts_payload
+    if monitored_hosts:
+        return monitored_hosts_payload
     return get_customer_hosts_payload

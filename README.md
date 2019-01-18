@@ -58,8 +58,10 @@ Feature Support
     - 删除host，单个或者多个 (undo)
     - 修改host，单个或者批量 (undo)
     - 查询host，单个或者多个 (doing)
+        - 返回所有的host信息
         - 根据host名称查询，精确或者通配
         - 能返回需要的数据，比如返回hostid，ip等属性
+    - 过滤host，根据条件过滤
 
 - host group (undo)
     - 新增host group，单个或者多个
