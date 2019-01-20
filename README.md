@@ -13,14 +13,17 @@ Zabbix_Hosts
 **过滤**
 
 * 获取所有hosts数据 `get_all_hosts`
-    
+  
+  * 样例
+  
     ```
     zabbix_hosts = ZabbixHosts()
     print(zabbix_hosts.get_all_hosts())
-    
+           
     output:
     [{'hostid': '10084', 'proxy_hostid': '0', 'host': 'Zabbix-01', 'status': '0', 'disable_until': '0', 'error': '', 'available': '1', 'errors_from': '0', 'lastaccess': '0', 'ipmi_authtype': '-1', 'ipmi_privilege': '2', 'ipmi_username': '', 'ipmi_password': '', 'ipmi_disable_until': '0', 'ipmi_available': '0', 'snmp_disable_until': '0', 'snmp_available': '0', 'maintenanceid': '0', 'maintenance_status': '0', 'maintenance_type': '0', 'maintenance_from': '0', 'ipmi_errors_from': '0', 'snmp_errors_from': '0', 'ipmi_error': '', 'snmp_error': '', 'jmx_disable_until': '0', 'jmx_available': '0', 'jmx_errors_from': '0', 'jmx_error': '', 'name': 'Zabbix-01', 'flags': '0', 'templateid': '0', 'description': '', 'tls_connect': '1', 'tls_accept': '1', 'tls_issuer': '', 'tls_subject': '', 'tls_psk_identity': '', 'tls_psk': '', 'proxy_address': '', 'auto_compress': '1'}, {'hostid': '10422', 'proxy_hostid': '10260', 'host': 'Zabbix-02', 'status': '0', 'disable_until': '0', 'error': '', 'available': '1', 'errors_from': '0', 'lastaccess': '0', 'ipmi_authtype': '-1', 'ipmi_privilege': '2', 'ipmi_username': '', 'ipmi_password': '', 'ipmi_disable_until': '0', 'ipmi_available': '0', 'snmp_disable_until': '0', 'snmp_available': '0', 'maintenanceid': '0', 'maintenance_status': '0', 'maintenance_type': '0', 'maintenance_from': '0', 'ipmi_errors_from': '0', 'snmp_errors_from': '0', 'ipmi_error': '', 'snmp_error': '', 'jmx_disable_until': '0', 'jmx_available': '0', 'jmx_errors_from': '0', 'jmx_error': '', 'name': 'Zabbix-02', 'flags': '0', 'templateid': '0', 'description': '', 'tls_connect': '1', 'tls_accept': '1', 'tls_issuer': '', 'tls_subject': '', 'tls_psk_identity': '', 'tls_psk': '', 'proxy_address': '', 'auto_compress': '1'}]
     ```
+    
 * 自定义获取hosts数据 `get_customer_hosts`
 
   * 参数
@@ -31,18 +34,42 @@ Zabbix_Hosts
     - monitored_hosts: 是否只输出监控中的机器
     - output_data: 指定输出内容
     - **kwargs: 过滤规则
+    
   * 样例
         
-        ```
-        zabbix_hosts = ZabbixHosts()
-        output_data = ["hostid","host"]
-        host = ["FuJian-QZDX-Gateway","BeiJing-TZLT-Gateway"]
-        print(zabbix_hosts.get_customer_hosts(countoutput=True,limit=40,visiable=1,output_data=output_data,monitored_hosts="true",host=host))
-        
-        output:
-        [{'hostid': '10422', 'host': 'Zabbix-02'}, {'hostid': '10084', 'host': 'Zabbix-01'}]
-        ```
+    ```    
+    zabbix_hosts = ZabbixHosts()
+    output_data = ["hostid","host"]
+    host = ["FuJian-QZDX-Gateway","BeiJing-TZLT-Gateway"]
+    print(zabbix_hosts.get_customer_hosts(countoutput=True,limit=40,visiable=1,output_data=output_data,monitored_hosts="true",host=host))
+           
+    output:
+    [{'hostid': '10422', 'host': 'Zabbix-02'}, {'hostid': '10084', 'host': 'Zabbix-01'}]
+    ```    
 
+* 搜索hosts数据 `search_hosts_payload`
+    
+  * 参数
+
+    - 已开启searchWildcardsEnabled,searchByAny参数
+    - countoutput: 输出匹配条目数
+    - limit: 限制输出条目数，默认50
+    - visiable: 是否打印输出payload
+    - output_data: 指定输出内容
+    - **kwargs: 搜索规则
+    
+  * 样例
+  
+    ```
+    zabbix_hosts = ZabbixHosts()
+    output_data = ["hostid","host","status"]
+    host = ["FuJian-XMYD-L1*","BeiJing-*Gateway"]
+    print(zabbix_hosts.search_customer_hosts(countoutput=True,visiable=True,output_data=output_data,host=host))
+           
+    output:
+    5
+    ```
+    
 Zabbix_templates
 ----------------
 - 获取指定template名称对应id `get_template_id`
@@ -75,11 +102,13 @@ Feature Support
     - 新增host，单个或者多个 (undo)
     - 删除host，单个或者多个 (undo)
     - 修改host，单个或者批量 (undo)
-    - 查询host，单个或者多个 (doing)
-        - 返回所有的host信息 (done)
-        - 根据host名称查询，精确或者通配
+    - 查询host，单个或者多个 (done)
+        - 返回所有的host信息 
+        - 根据host名称查询，支持通配
         - 能返回需要的数据，比如返回hostid，ip等属性
-    - 过滤host，根据条件过滤
+        - 限定输出条目
+        - 只输出数据条目
+    - 过滤host，根据条件过滤(done)
         - 只返回proxy_hosts节点
         - 只返回监控状态服务器
         - 限定输出条目
