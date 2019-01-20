@@ -41,3 +41,5 @@ def search_items_payload(selecthosts, searchwildcardsenabled, searchbyany,output
     }
 
     return search_items_payload
+
+

@@ -87,3 +87,6 @@ def search_hosts_payload(limit, output_data, **kwargs):
         "id": 1
     }
     return search_hosts_payload
+
+def add_hosts_payload():
+    pass

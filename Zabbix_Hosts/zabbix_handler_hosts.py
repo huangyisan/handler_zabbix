@@ -1,9 +1,11 @@
 from Zabbix_JSRPC.zabbix_jsrpc_query import JSRPCQuery
 from Zabbix_Payloads import zabbix_hosts_info
+from ztools import format_print
 
 class ZabbixHosts(JSRPCQuery):
 
     _output_data = ["hostid", "host", "status"]
+
 
     def _get_hosts(self,payload):
         '''
@@ -73,16 +75,14 @@ class ZabbixHosts(JSRPCQuery):
 
         return self._get_hosts(payload)
 
+    def add_hosts(self, check=True):
 
+        payload = 11
+        if check:
+            title = 'Check Mode will not make any changes on remote systems!\nSet check=False will disable Check Mode!'
+            conetent = 'The payload is: \n{payload}'.format(payload=payload)
+            format_print.print_load(title=title, content=conetent)
+        pass
 
-zabbix_hosts = ZabbixHosts()
-output_data = ["hostid","host","status"]
-# output_data = "extend"
-# hostid = 10638
-# host = ["FuJian-QZDX-Gateway","BeiJing-TZLT-Gateway"]
-# status = 0
-host = ["FuJian-XMYD-L1*","BeiJing-*Gateway"]
-print(zabbix_hosts.search_customer_hosts(countoutput=True,visiable=True,output_data=output_data,host=host))
-# print(zabbix_hosts.get_customer_hosts(limit=40,visiable=1,output_data=output_data,monitored_hosts="true",host=host,status=status))
-# print(len(zabbix_hosts.get_customer_hosts(proxy_hosts=True,visiable=1,output_data=output_data)))
-# print(zabbix_hosts.get_customer_hosts(host=host))
+a = ZabbixHosts()
+a.add_hosts()
