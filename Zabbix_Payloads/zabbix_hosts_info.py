@@ -69,3 +69,21 @@ def get_customer_hosts_payload(limit, proxy_hosts, monitored_hosts, output_data,
     if monitored_hosts:
         return monitored_hosts_payload
     return get_customer_hosts_payload
+
+def search_hosts_payload(limit, output_data, **kwargs):
+    search_hosts_payload = {
+        "jsonrpc": "2.0",
+        "method": "host.get",
+
+        "params": {
+            "output": output_data,
+            "search": kwargs,
+            "limit":limit,
+            "searchWildcardsEnabled":"true",
+            "searchByAny":"true"
+
+        },
+        "auth": "{0}".format(ZabbixLogin().get_token()),
+        "id": 1
+    }
+    return search_hosts_payload
