@@ -75,29 +75,37 @@ class ZabbixHosts(JSRPCQuery):
 
         return self._get_hosts(payload)
 
-    def add_hosts(self,host,groupid,type=1,main=1,useip=1,ip='127.0.0.1',dns="",port=10050,check=True):
+    def add_hosts(self,host,groupid,_type=1,main=1,useip=1,ip='127.0.0.1',dns="",port="10050",check=True):
 
-        interfaces = {
-            "type": type,
-            "main": main,
-            "useip": useip,
-            "ip": ip,
-            "dns": dns,
-            "port": port,
-        }
+        if isinstance(ip,str) and isinstance(dns,str) and isinstance(port, str):
 
-        payload = zabbix_hosts_info.add_hosts_payload(host=host,groupid=groupid,interfaces=interfaces)
-        if check:
-            title = 'Check Mode will not make any changes on remote systems!\nSet check=False will disable Check Mode!'
-            conetent = 'The payload is: \n{payload}'.format(payload=payload)
-            format_print.print_load(title=title, content=conetent)
-        else:
-            return self._get_hosts(payload)
+            interfaces = {
+                "type": _type,
+                "main": main,
+                "useip": useip,
+                "ip": ip,
+                "dns": dns,
+                "port": port,
+            }
+
+            payload = zabbix_hosts_info.add_hosts_payload(host=host,groupid=groupid,interfaces=interfaces)
+            if check:
+                title = 'Check Mode will not make any changes on remote systems!\nSet check=False will disable Check Mode!'
+                conetent = 'The payload is: \n{payload}'.format(payload=payload)
+                format_print.print_load(title=title, content=conetent)
+            else:
+                recall = self._get_hosts(payload)
+                try:
+                    if recall.get('hostids',None):
+                        print("add success", recall)
+                        return recall
+                except Exception:
+                    print("add error")
 
 
 
 a = ZabbixHosts()
 host = 'test-zabbix'
-groupid = 123
+groupid = "32011"
 
-a.add_hosts(host=host,groupid=groupid)
+a.add_hosts(host=host,groupid=groupid,check=False)

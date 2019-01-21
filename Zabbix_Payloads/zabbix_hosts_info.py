@@ -109,11 +109,11 @@ def add_hosts_payload(host,groupid,interfaces):
                     "groupid": groupid
                 }
             ],
-            "templates": [
-                {
-                    "templateid": "20045"
-                }
-            ],
+            # "templates": [
+            #     {
+            #         "templateid": "20045"
+            #     }
+            # ],
         },
         "auth": "{0}".format(ZabbixLogin().get_token()),
         "id": 1
