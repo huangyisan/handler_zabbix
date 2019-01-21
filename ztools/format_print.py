@@ -1,5 +1,3 @@
-
-
 def print_load(title, content):
     Asterisk = '*'
     if '\n' in title:

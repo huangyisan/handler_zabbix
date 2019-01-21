@@ -88,5 +88,36 @@ def search_hosts_payload(limit, output_data, **kwargs):
     }
     return search_hosts_payload
 
-def add_hosts_payload():
-    pass
+def add_hosts_payload(host,groupid,**kwargs):
+    add_hosts_payload = {
+        "jsonrpc": "2.0",
+        "method": "host.create",
+        "params": {
+            "host": host,
+            "interfaces": [
+                {
+                    # "type": 1,
+                    # "main": 1,
+                    # "useip": 1,
+                    # "ip": "192.168.3.1",
+                    # "dns": "",
+                    # "port": "10050"
+                    kwargs
+                }
+            ],
+            "groups": [
+                {
+                    "groupid": groupid
+                }
+            ],
+            "templates": [
+                {
+                    "templateid": "20045"
+                }
+            ],
+        },
+        "auth": "{0}".format(ZabbixLogin().get_token()),
+        "id": 1
+    }
+    return add_hosts_payload
+    
