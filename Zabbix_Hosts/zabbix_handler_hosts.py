@@ -75,9 +75,18 @@ class ZabbixHosts(JSRPCQuery):
 
         return self._get_hosts(payload)
 
-    def add_hosts(self,host,groupid,check=True,**kwargs):
+    def add_hosts(self,host,groupid,type=1,main=1,useip=1,ip='127.0.0.1',dns="",port=10050,check=True):
 
-        payload = zabbix_hosts_info.add_hosts_payload(host=host,groupid=groupid,**kwargs)
+        interfaces = {
+            "type": type,
+            "main": main,
+            "useip": useip,
+            "ip": ip,
+            "dns": dns,
+            "port": port,
+        }
+
+        payload = zabbix_hosts_info.add_hosts_payload(host=host,groupid=groupid,interfaces=interfaces)
         if check:
             title = 'Check Mode will not make any changes on remote systems!\nSet check=False will disable Check Mode!'
             conetent = 'The payload is: \n{payload}'.format(payload=payload)
@@ -88,4 +97,7 @@ class ZabbixHosts(JSRPCQuery):
 
 
 a = ZabbixHosts()
-a.add_hosts()
+host = 'test-zabbix'
+groupid = 123
+
+a.add_hosts(host=host,groupid=groupid)
