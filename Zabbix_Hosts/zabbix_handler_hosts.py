@@ -75,14 +75,17 @@ class ZabbixHosts(JSRPCQuery):
 
         return self._get_hosts(payload)
 
-    def add_hosts(self, check=True):
+    def add_hosts(self,host,groupid,check=True,**kwargs):
 
-        payload = 11
+        payload = zabbix_hosts_info.add_hosts_payload(host=host,groupid=groupid,**kwargs)
         if check:
             title = 'Check Mode will not make any changes on remote systems!\nSet check=False will disable Check Mode!'
             conetent = 'The payload is: \n{payload}'.format(payload=payload)
             format_print.print_load(title=title, content=conetent)
-        pass
+        else:
+            return self._get_hosts(payload)
+
+
 
 a = ZabbixHosts()
 a.add_hosts()

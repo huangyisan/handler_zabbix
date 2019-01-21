@@ -120,4 +120,3 @@ def add_hosts_payload(host,groupid,**kwargs):
         "id": 1
     }
     return add_hosts_payload
-    
