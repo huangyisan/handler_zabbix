@@ -12,12 +12,9 @@ class ZabbixHosts(JSRPCQuery):
         :param payload: 通用方法
         :return:
         '''
-        result = self.zabbix_jsrpc_query(payload).get("result",self.zabbix_jsrpc_query(payload).get("error",""))
-        print(result)
-        if result:
-            return result
-        print(result.get("error"))
-        return self.zabbix_jsrpc_query(payload).get("error","")
+        result = self.zabbix_jsrpc_query(payload)
+        result = result.get("result",result.get("error",""))
+        return result
 
     def get_all_hosts(self, visiable=None):
         '''
@@ -123,3 +120,8 @@ groupid = ["320","123"]
 # templateid = ["10778","10248"]
 templateid = ["10778","10832"]
 print(a.add_hosts(host=host,groupid=groupid,check=False,templateid=templateid))
+
+zabbix_hosts = ZabbixHosts()
+output_data = ["hostid","host"]
+host = ["FuJian-QZDX-Gateway","BeiJing-TZLT-Gateway"]
+print(zabbix_hosts.get_customer_hosts(limit=40,visiable=1,output_data=output_data,monitored_hosts="true",host=host))
