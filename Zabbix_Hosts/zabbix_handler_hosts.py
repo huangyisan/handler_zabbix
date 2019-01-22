@@ -12,7 +12,12 @@ class ZabbixHosts(JSRPCQuery):
         :param payload: 通用方法
         :return:
         '''
-        return self.zabbix_jsrpc_query(payload).get("result","")
+        result = self.zabbix_jsrpc_query(payload).get("result",self.zabbix_jsrpc_query(payload).get("error",""))
+        print(result)
+        if result:
+            return result
+        print(result.get("error"))
+        return self.zabbix_jsrpc_query(payload).get("error","")
 
     def get_all_hosts(self, visiable=None):
         '''
