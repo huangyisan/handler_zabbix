@@ -23,4 +23,5 @@ class JSRPCQuery(object):
         except requests.exceptions.ReadTimeout:
             print("Receive data from {0} timeout".format(self.jsrpc_url))
             sys.exit(1)
+        print(r.json())
         return r.json()

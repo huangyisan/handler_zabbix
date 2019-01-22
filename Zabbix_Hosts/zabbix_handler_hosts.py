@@ -6,7 +6,7 @@ class ZabbixHosts(JSRPCQuery):
 
     _output_data = ["hostid", "host", "status"]
 
-    def _get_hosts(self,payload):
+    def _action_hosts(self,payload):
         '''
 
         :param payload: 通用方法
@@ -24,7 +24,7 @@ class ZabbixHosts(JSRPCQuery):
         payload = zabbix_hosts_info.get_all_hosts_payload(visiable)
         if visiable:
             print("The payload is:\n" + "{0}".format(payload))
-        return self._get_hosts(payload)
+        return self._action_hosts(payload)
 
     def get_customer_hosts(self,countoutput=None,limit=None,visiable=None,proxy_hosts=None,monitored_hosts=None,output_data=_output_data, **kwargs):
         '''
@@ -47,9 +47,9 @@ class ZabbixHosts(JSRPCQuery):
             print("The payload is:\n" + "{0}".format(payload))
 
         if countoutput:
-            return len(self._get_hosts(payload))
+            return len(self._action_hosts(payload))
 
-        return self._get_hosts(payload)
+        return self._action_hosts(payload)
 
     def search_customer_hosts(self,limit=None,countoutput=None,visiable=None,output_data=_output_data, **kwargs):
         '''
@@ -70,13 +70,14 @@ class ZabbixHosts(JSRPCQuery):
             print("The payload is:\n" + "{0}".format(payload))
 
         if countoutput:
-            return len(self._get_hosts(payload))
+            return len(self._action_hosts(payload))
 
-        return self._get_hosts(payload)
+        return self._action_hosts(payload)
 
     def add_hosts(self,host,groupid,templateid,_type=1,main=1,useip=1,ip='127.0.0.1',dns="",port="10050",check=True):
         groupid = list(map(lambda x:{"groupid":x},groupid))
         templateid = list(map(lambda x:{"templateid":x},templateid))
+
 
         if isinstance(ip,str) and isinstance(dns,str) and isinstance(port, str):
 
@@ -96,7 +97,7 @@ class ZabbixHosts(JSRPCQuery):
                 status = "warning"
                 format_print.print_load(title=title, content=content,status=status)
             else:
-                recall = self._get_hosts(payload)
+                recall = self._action_hosts(payload)
                 try:
                     if recall.get('hostids',None):
                         title = 'Add host [{0}] success!'.format(host)
@@ -113,6 +114,7 @@ class ZabbixHosts(JSRPCQuery):
 a = ZabbixHosts()
 host = 'test-zabbix'
 # groupid = "320"
-groupid = ["320"]
-templateid = []
-a.add_hosts(host=host,groupid=groupid,check=True,templateid=templateid)
+groupid = ["320","123"]
+# templateid = ["10778","10248"]
+templateid = ["10778","10832"]
+print(a.add_hosts(host=host,groupid=groupid,check=False,templateid=templateid))
