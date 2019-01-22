@@ -1,7 +1,6 @@
 from Zabbix_JSRPC.zabbix_jsrpc_query import JSRPCQuery
 from Zabbix_Payloads import zabbix_hosts_info
 from ztools import format_print
-from ztools.myexception import AddException
 
 class ZabbixHosts(JSRPCQuery):
 
@@ -92,9 +91,9 @@ class ZabbixHosts(JSRPCQuery):
 
             payload = zabbix_hosts_info.add_hosts_payload(host=host,groupid=groupid,interfaces=interfaces)
             if check:
-                title = 'INFO: Check Mode will not make any changes on remote systems!\nSet check=False will disable Check Mode!'
+                title = 'Check Mode will not make any changes on remote systems!\nSet check=False will disable Check Mode!'
                 content = 'The payload is: \n{payload}'.format(payload=payload)
-                status = "info"
+                status = "warning"
                 format_print.print_load(title=title, content=content,status=status)
             else:
                 recall = self._get_hosts(payload)
@@ -116,4 +115,4 @@ host = 'test-zabbix'
 # groupid = "320"
 groupid = ["320"]
 
-a.add_hosts(host=host,groupid=groupid,check=False)
+a.add_hosts(host=host,groupid=groupid,check=True)

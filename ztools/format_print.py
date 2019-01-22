@@ -18,6 +18,8 @@ def print_load(title, content, status):
         max_len = len(title)
         Asterisk = Asterisk * max_len
 
+    Asterisk += (len(status)+2) * "*"
+
     if status.lower() == "info":
         print(Asterisk + '\n' + info + title + '\n' + Asterisk + '\n' + content)
 
@@ -26,9 +28,9 @@ def print_load(title, content, status):
 
     elif status.lower() == "success":
         print(Asterisk + '\n' + success + title + '\n' + Asterisk + '\n' + recall_message + content)
+
     elif status.lower() == "error":
         print(Asterisk + '\n' + error + title + '\n' + Asterisk + '\n' + reason + content)
+
     else:
-
-
         print(Asterisk + '\n' + title + '\n' + Asterisk + '\n' + content)
