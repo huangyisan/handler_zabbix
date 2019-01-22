@@ -141,3 +141,34 @@ Feature Support
     - 删除screen
     - 修改screen
     - 查询screen
+    
+- 输出约定:
+    - SUCCESS:
+    
+    需要输出status(SUCCESS), recall message
+    
+    example:
+    
+    ```
+    ****************************************
+    SUCCESS: Add host [test-zabbix] success!
+    ****************************************
+    Recall message:
+    {'hostids': ['10862']}
+    ```
+
+    - ERROR:
+
+    需要输出status(ERROR),reason,payload
+    
+    example:
+    
+    ```
+    ***************************************
+    ERROR: Add host [test-zabbix] failure !
+    ***************************************
+    Reason: The host may already exists or other fault!
+    The payload is:
+    {'jsonrpc': '2.0', 'method': 'host.create', 'params': {'host': 'test-zabbix', 'interfaces': [{'type': 1, 'main': 1, 'useip': 1, 'ip': '127.0.0.1', 'dns': '', 'port': '10050'}], 'groups': [{'groupid': '320'}]}, 'auth': 'aa311fe719e1479bd1f462e61bcb6035', 'id': 1}
+    
+    ```
