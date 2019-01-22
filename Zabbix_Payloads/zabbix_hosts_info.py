@@ -88,7 +88,7 @@ def search_hosts_payload(limit, output_data, **kwargs):
     }
     return search_hosts_payload
 
-def add_hosts_payload(host,groupid,interfaces):
+def add_hosts_payload(host,groupid,templateid,interfaces):
     add_hosts_payload = {
         "jsonrpc": "2.0",
         "method": "host.create",
@@ -105,6 +105,7 @@ def add_hosts_payload(host,groupid,interfaces):
                 }
             ],
             "groups": groupid,
+            "templates": templateid
             # "templates": [
             #     {
             #         "templateid": "20045"

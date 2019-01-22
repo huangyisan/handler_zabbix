@@ -20,6 +20,7 @@ def print_load(title, content, status):
 
     Asterisk += (len(status)+2) * "*"
 
+
     if status.lower() == "info":
         print(Asterisk + '\n' + info + title + '\n' + Asterisk + '\n' + content)
 
