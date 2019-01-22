@@ -1,6 +1,7 @@
 from Zabbix_JSRPC.zabbix_jsrpc_query import JSRPCQuery
 from Zabbix_Payloads import zabbix_hosts_info
 from ztools import format_print
+from ztools.myexception import AddException
 
 class ZabbixHosts(JSRPCQuery):
 
@@ -76,6 +77,7 @@ class ZabbixHosts(JSRPCQuery):
         return self._get_hosts(payload)
 
     def add_hosts(self,host,groupid,_type=1,main=1,useip=1,ip='127.0.0.1',dns="",port="10050",check=True):
+        groupid = list(map(lambda x:{"groupid":x},groupid))
 
         if isinstance(ip,str) and isinstance(dns,str) and isinstance(port, str):
 
@@ -100,12 +102,11 @@ class ZabbixHosts(JSRPCQuery):
                         print("add success", recall)
                         return recall
                 except Exception:
-                    print("add error")
-
-
+                        print("add error")
 
 a = ZabbixHosts()
 host = 'test-zabbix'
-groupid = "32011"
+# groupid = "320"
+groupid = ["320","321"]
 
-a.add_hosts(host=host,groupid=groupid,check=False)
+a.add_hosts(host=host,groupid=groupid,check=True)

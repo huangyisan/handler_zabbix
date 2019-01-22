@@ -104,11 +104,7 @@ def add_hosts_payload(host,groupid,interfaces):
                     "port": interfaces.get('port'),
                 }
             ],
-            "groups": [
-                {
-                    "groupid": groupid
-                }
-            ],
+            "groups": groupid,
             # "templates": [
             #     {
             #         "templateid": "20045"
