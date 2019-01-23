@@ -116,3 +116,13 @@ def add_hosts_payload(host,groupid,templateid,interfaces):
         "id": 1
     }
     return add_hosts_payload
+
+def delete_hosts_payload(hostsids):
+    delete_hosts_payload = {
+        "jsonrpc": "2.0",
+        "method": "host.delete",
+        "params": hostsids,
+         "auth": "{0}".format(ZabbixLogin().get_token()),
+        "id": 1
+    }
+    return delete_hosts_payload
