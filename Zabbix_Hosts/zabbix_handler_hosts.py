@@ -100,16 +100,15 @@ class ZabbixHosts(JSRPCQuery):
                 format_print.print_load(title=title, content=content,status=status)
             else:
                 recall = self._action_hosts(payload)
-                try:
-                    if recall.get('hostids',None):
-                        title = 'Add host [{0}] success!'.format(host)
-                        content = "{0}".format(recall)
-                        status = "success"
-                        format_print.print_load(title=title, content=content, status=status)
-                        return recall
-                except Exception as e:
+                if recall.get('hostids',None):
+                    title = 'Add host [{0}] success!'.format(host)
+                    content = "{0}".format(recall)
+                    status = "success"
+                    format_print.print_load(title=title, content=content, status=status)
+                    return recall
+                else:
                     title = 'Add host [{0}] failure!'.format(host)
-                    content = 'The host may already exists or other fault!\nThe payload is:\n{0}'.format(payload)
+                    content = '{0}\nThe payload is:\n{1}'.format(recall.get("data"),payload)
                     status = "error"
                     format_print.print_load(title=title, content=content, status=status)
 
@@ -119,9 +118,4 @@ host = 'test-zabbix'
 groupid = ["320","123"]
 # templateid = ["10778","10248"]
 templateid = ["10778","10832"]
-print(a.add_hosts(host=host,groupid=groupid,check=False,templateid=templateid))
-
-zabbix_hosts = ZabbixHosts()
-output_data = ["hostid","host"]
-host = ["FuJian-QZDX-Gateway","BeiJing-TZLT-Gateway"]
-print(zabbix_hosts.get_customer_hosts(limit=40,visiable=1,output_data=output_data,monitored_hosts="true",host=host))
+a.add_hosts(host=host,groupid=groupid,check=False,templateid=templateid)
