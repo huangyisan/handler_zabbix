@@ -101,6 +101,28 @@ Zabbix_Hosts
     Recall Message:
     {'hostids': ['10873']}
   ```
+  
+* 删除hosts `delete_hosts`
+
+  * 参数
+  
+    - hostsids: 单个或者多个hostid
+    - check: 检查模式，默认为True，检查模式只打印payload，不会提交数据。
+    
+  * 样例
+  
+  ```
+    zabbix_hosts = ZabbixHosts()
+    hostsids = ["10876","10877"]
+    zabbix_hosts.delete_hosts(hostsids=hostsids,check=False)
+    
+    output:
+    **************************************************
+    SUCCESS: Delete host [['10876', '10877']] success!
+    **************************************************
+    Recall Message:
+    {'hostids': ['10876', '10877']}
+  ```
     
 Zabbix_templates
 ----------------
@@ -135,7 +157,7 @@ Feature Support
         - ~~关联单个或者多个主机组 (done)~~
         - ~~关联单个或者多个template模板 (done)~~
     - 批量增加host (undo)
-    - 删除host，单个或者多个 (undo)
+    - ~~删除host，单个或者多个 (done)~~
     - 修改host，单个或者批量 (undo)
     - ~~查询host，单个或者多个 (done)~~
         - ~~返回所有的host信息~~

@@ -88,7 +88,7 @@ class ZabbixHosts(JSRPCQuery):
         :param ip: interfaces 参数
         :param dns: interfaces 参数
         :param port: interfaces 参数
-        :param check: 是否检查模式，默认为True，检查模式只打印payload，不会提交数据。
+        :param check: 检查模式，默认为True，检查模式只打印payload，不会提交数据。
         :return:
         '''
         groupid = list(map(lambda x:{"groupid":x},groupid))
@@ -112,7 +112,7 @@ class ZabbixHosts(JSRPCQuery):
             else:
                 recall = self._action_hosts(payload)
                 if recall.get('hostids',None):
-                    title = 'Add host [{0}] success!'.format(host)
+                    title = 'Add hosts [{0}] success!'.format(host)
                     content = "{0}".format(recall)
                     status = "success"
                     format_print.print_load(title=title, content=content, status=status)
@@ -124,6 +124,12 @@ class ZabbixHosts(JSRPCQuery):
                     format_print.print_load(title=title, content=content, status=status)
 
     def delete_hosts(self,hostsids,check=True):
+        '''
+
+        :param hostsids: 单个或者多个hostid
+        :param check: 检查模式，默认为True，检查模式只打印payload，不会提交数据。
+        :return:
+        '''
 
         payload = zabbix_hosts_info.delete_hosts_payload(hostsids=hostsids)
 
@@ -132,10 +138,17 @@ class ZabbixHosts(JSRPCQuery):
 
         else:
             recall = self._action_hosts(payload)
-            title = 'Delete host [{0}] failure!'.format(hostsids)
-            content = '{0}\nThe payload is:\n{1}'.format(recall.get("data"), payload)
-            status = "error"
-            format_print.print_load(title=title, content=content, status=status)
+            if recall.get('hostids',None):
+                title = 'Delete hosts [{0}] success!'.format(hostsids)
+                content = "{0}".format(recall)
+                status = "success"
+                format_print.print_load(title=title, content=content, status=status)
+                return recall
+            else:
+                title = 'Delete host [{0}] failure!'.format(hostsids)
+                content = '{0}\nThe payload is:\n{1}'.format(recall.get("data"), payload)
+                status = "error"
+                format_print.print_load(title=title, content=content, status=status)
 
 
 
@@ -159,6 +172,8 @@ host = 'test-zabbix1'
 groupid = ["320","307"]
 # templateid = ["10778","10248"]
 templateid = ["10001","10788"]
-zabbix_hosts.add_hosts(host=host,groupid=groupid,check=False,templateid=templateid)
+# zabbix_hosts.add_hosts(host=host,groupid=groupid,check=False,templateid=templateid)
 # print(a.get_customer_hosts())
+hostsids = ["10876","10877"]
+zabbix_hosts.delete_hosts(hostsids=hostsids,check=False)
 
