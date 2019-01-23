@@ -81,7 +81,7 @@ class ZabbixHosts(JSRPCQuery):
 
         :param host: 待添加主机名称
         :param groupid: 待加入的主机组，可多个
-        :param templateid: 待加入模板，指定1个
+        :param templateid: 待加入模板，可多个，但模板一些特定key需要interfaces支持，比如snmp的模板，则需要使用snmp的方式才可以添加
         :param _type: interfaces 参数
         :param main: interfaces 参数
         :param useip: interfaces 参数
@@ -130,6 +130,14 @@ class ZabbixHosts(JSRPCQuery):
         if check:
             self.check_print(payload)
 
+        else:
+            recall = self._action_hosts(payload)
+            title = 'Delete host [{0}] failure!'.format(hostsids)
+            content = '{0}\nThe payload is:\n{1}'.format(recall.get("data"), payload)
+            status = "error"
+            format_print.print_load(title=title, content=content, status=status)
+
+
 
     @staticmethod
     def check_print(payload):
@@ -145,12 +153,12 @@ class ZabbixHosts(JSRPCQuery):
 
 
 
-a = ZabbixHosts()
-host = 'test-zabbix'
+zabbix_hosts = ZabbixHosts()
+host = 'test-zabbix1'
 # groupid = "320"
-groupid = ["320","123"]
+groupid = ["320","307"]
 # templateid = ["10778","10248"]
-templateid = ["10778","10832"]
-a.add_hosts(host=host,groupid=groupid,check=True,templateid=templateid)
+templateid = ["10001","10788"]
+zabbix_hosts.add_hosts(host=host,groupid=groupid,check=False,templateid=templateid)
 # print(a.get_customer_hosts())
 

@@ -105,12 +105,7 @@ def add_hosts_payload(host,groupid,templateid,interfaces):
                 }
             ],
             "groups": groupid,
-            "templates": [
-                {'templateid': '10778'},
-                {'templateid': '10001'},
-
-            ]
-            # "templates": templateid,
+            "templates": templateid,
         },
         "auth": "{0}".format(ZabbixLogin().get_token()),
         "id": 1

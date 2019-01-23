@@ -70,6 +70,38 @@ Zabbix_Hosts
     5
     ```
     
+* 添加单个host `add_hosts`
+
+  * 参数
+    
+    - host: 待添加主机名称
+    - groupid: 待加入的主机组，可多个
+    - templateid: 待加入模板，可多个，但模板一些特定key需要interfaces支持，比如snmp的模板，则需要使用snmp的方式才可以添加
+    - _type: interfaces 参数
+    - main: interfaces 参数
+    - useip: interfaces 参数
+    - ip: interfaces 参数
+    - dns: interfaces 参数
+    - port: interfaces 参数
+    - check: 是否检查模式，默认为True，检查模式只打印payload，不会提交数据。
+    
+  * 样例
+  
+  ```
+    zabbix_hosts = ZabbixHosts()
+    host = 'test-zabbix'
+    groupid = ["320","307"]
+    templateid = ["10001","10788"]
+    zabbix_hosts.add_hosts(host=host,groupid=groupid,check=False,templateid=templateid)
+    
+    output:
+    ****************************************
+    SUCCESS: Add host [test-zabbix] success!
+    ****************************************
+    Recall Message:
+    {'hostids': ['10873']}
+  ```
+    
 Zabbix_templates
 ----------------
 - 获取指定template名称对应id `get_template_id`
@@ -99,7 +131,10 @@ None
 Feature Support
 ---------------
 - hosts  (doing)
-    - 新增host，单个或者多个 (undo)
+    - 新增host，单个 (done)
+        - ~~关联单个或者多个主机组 (done)~~
+        - ~~关联单个或者多个template模板 (done)~~
+    - 批量增加host (undo)
     - 删除host，单个或者多个 (undo)
     - 修改host，单个或者批量 (undo)
     - ~~查询host，单个或者多个 (done)~~
