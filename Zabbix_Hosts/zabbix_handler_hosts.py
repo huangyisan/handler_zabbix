@@ -163,9 +163,6 @@ class ZabbixHosts(JSRPCQuery):
 
 
 
-
-
-
 zabbix_hosts = ZabbixHosts()
 host = 'test-zabbix1'
 # groupid = "320"
