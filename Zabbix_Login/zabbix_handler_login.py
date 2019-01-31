@@ -24,16 +24,18 @@ class ZabbixLogin(JSRPCQuery):
         conn = token_sqlite.sqlite_conn()
 
         #
-        if token_sqlite.sqlite_select(conn, _select_token_table_sql, (Sqlite().get_table_name,)) == 1 and token_sqlite.sqlite_select(conn=conn, sql=_select_token_sql) == 1:
+        if token_sqlite.sqlite_select(conn, _select_token_table_sql, (Sqlite().get_table_name,)) == 1 and token_sqlite.sqlite_select(conn=conn, sql=_select_token_sql):
             token = token_sqlite.sqlite_select(conn=conn, sql=_select_token_sql)
             token_sqlite.sqlite_close(conn)
             return token
 
-        if token_sqlite.sqlite_select(conn, _select_token_table_sql,(Sqlite().get_table_name,)) != 1:
+        # 判断token table是否存在，不存在这创建表，并且插入token到表中
+        if token_sqlite.sqlite_select(conn, _select_token_table_sql, (Sqlite().get_table_name,)) != 1:
             token_sqlite.sqlite_execute(conn=conn, sql=_create_table_sql)
             token_sqlite.sqlite_execute(conn, _insert_token_sql,(self.get_token_via_api(),))
 
-        elif token_sqlite.sqlite_select(conn, _select_token_table_sql, (Sqlite().get_table_name,)) == 1 and token_sqlite.sqlite_select(conn=conn, sql=_select_token_sql) is None:
+        # 如果不存在token，则插入token
+        elif token_sqlite.sqlite_select(conn=conn, sql=_select_token_sql) is None:
             token_sqlite.sqlite_execute(conn, _insert_token_sql, (self.get_token_via_api(),))
 
         token = token_sqlite.sqlite_select(conn=conn, sql=_select_token_sql)
