@@ -158,8 +158,3 @@ class ZabbixHosts(JSRPCQuery):
         content = 'The payload is: \n{payload}'.format(payload=payload)
         status = "warning"
         format_print.print_load(title=title, content=content, status=status)
-
-
-Zabbix = ZabbixHosts()
-
-print(Zabbix.get_all_hosts())
