@@ -25,10 +25,13 @@ class Sqlite(object):
             c.execute(sql)
         conn.commit()
 
-    def sqlite_select(self,conn,sql):
+    def sqlite_select(self,conn,sql,args=None):
         row_list = []
         c = conn.cursor()
-        cursor = c.execute(sql)
+        if args:
+            cursor = c.execute(sql,args)
+        else:
+            cursor = c.execute(sql)
         for row in cursor:
             row_list.append(row[0])
             return row_list[0]
