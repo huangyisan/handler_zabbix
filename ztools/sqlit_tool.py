@@ -12,7 +12,7 @@ class Sqlite(object):
         db_path = os.path.abspath(os.path.dirname(__file__))
         osplatform = platform.system()
         if osplatform == "Windows":
-            return db_path + r'\\' + self._db.upper()
+            return db_path + '\\' + self._db.upper()
         else:
             return db_path + r'/' + self._db.upper()
 
