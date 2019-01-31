@@ -24,11 +24,11 @@ Feature Support
         - ~~限定输出条目~~
         - ~~只输出数据条目~~
         
-- host group (undo)
+- host group (doing)
     - 新增host group，单个或者多个
     - 删除host group，单个或者多个
     - 修改host group，单个或者批量
-    - 查询host group，单个或者多个
+    - ~~查询host group，单个或者多个~~
 
 - items (undo)
     - 新增item
