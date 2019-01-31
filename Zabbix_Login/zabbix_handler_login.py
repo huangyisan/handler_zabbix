@@ -23,7 +23,7 @@ class ZabbixLogin(JSRPCQuery):
         token_sqlite = Sqlite()
         conn = token_sqlite.sqlite_conn()
 
-        #
+        # 存在表，也能获取到token的情况
         if token_sqlite.sqlite_select(conn, _select_token_table_sql, (Sqlite().get_table_name,)) == 1 and token_sqlite.sqlite_select(conn=conn, sql=_select_token_sql):
             token = token_sqlite.sqlite_select(conn=conn, sql=_select_token_sql)
             token_sqlite.sqlite_close(conn)
