@@ -161,4 +161,5 @@ class ZabbixHosts(JSRPCQuery):
 
 
 Zabbix = ZabbixHosts()
+
 print(Zabbix.get_all_hosts())
