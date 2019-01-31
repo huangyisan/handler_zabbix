@@ -1,4 +1,6 @@
 import sqlite3
+import os
+import platform
 
 class Sqlite(object):
     def __init__(self):
@@ -7,7 +9,12 @@ class Sqlite(object):
 
     @property
     def get_db_name(self):
-        return self._db.upper()
+        db_path = os.path.abspath(os.path.dirname(__file__))
+        osplatform = platform.system()
+        if osplatform == "Windows":
+            return db_path + r'\\' + self._db.upper()
+        else:
+            return db_path + r'/' + self._db.upper()
 
     @property
     def get_table_name(self):
@@ -39,5 +46,3 @@ class Sqlite(object):
     def sqlite_close(self,conn):
         return conn.close()
 
-
-a = Sqlite()
