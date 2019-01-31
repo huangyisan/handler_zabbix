@@ -88,8 +88,8 @@ def search_hosts_payload(limit, output_data, **kwargs):
     }
     return search_hosts_payload
 
-def add_hosts_payload(host,groupid,templateid,interfaces):
-    add_hosts_payload = {
+def add_host_payload(host,groupid,templateid,interfaces):
+    add_host_payload = {
         "jsonrpc": "2.0",
         "method": "host.create",
         "params": {
@@ -110,7 +110,7 @@ def add_hosts_payload(host,groupid,templateid,interfaces):
         "auth": "{0}".format(ZabbixLogin().get_token()),
         "id": 1
     }
-    return add_hosts_payload
+    return add_host_payload
 
 def delete_hosts_payload(hostsids):
     delete_hosts_payload = {

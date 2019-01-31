@@ -76,7 +76,7 @@ class ZabbixHosts(JSRPCQuery):
 
         return self._action_hosts(payload)
 
-    def add_hosts(self,host,groupid,templateid,_type=1,main=1,useip=1,ip='127.0.0.1',dns="",port="10050",check=True):
+    def add_host(self,host,groupid,templateid,_type=1,main=1,useip=1,ip='127.0.0.1',dns="",port="10050",check=True):
         '''
 
         :param host: 待添加主机名称
@@ -106,7 +106,7 @@ class ZabbixHosts(JSRPCQuery):
                 "port": port,
             }
 
-            payload = zabbix_hosts_info.add_hosts_payload(host=host,groupid=groupid,interfaces=interfaces,templateid=templateid)
+            payload = zabbix_hosts_info.add_host_payload(host=host,groupid=groupid,interfaces=interfaces,templateid=templateid)
             if check:
                 self.check_print(payload)
             else:
@@ -122,6 +122,9 @@ class ZabbixHosts(JSRPCQuery):
                     content = '{0}\nThe payload is:\n{1}'.format(recall.get("data"),payload)
                     status = "error"
                     format_print.print_load(title=title, content=content, status=status)
+
+    def add_multi_host(self):
+        pass
 
     def delete_hosts(self,hostsids,check=True):
         '''
