@@ -17,9 +17,12 @@ class Sqlite(object):
         conn = sqlite3.connect(self.get_db_name)
         return conn
 
-    def sqlite_execute(self,conn,sql):
+    def sqlite_execute(self,conn,sql,args=None):
         c = conn.cursor()
-        c.execute(sql)
+        if args:
+            c.execute(sql,args)
+        else:
+            c.execute(sql)
         conn.commit()
 
     def sqlite_select(self,conn,sql):
@@ -28,7 +31,7 @@ class Sqlite(object):
         cursor = c.execute(sql)
         for row in cursor:
             row_list.append(row[0])
-        return row_list[0]
+            return row_list[0]
 
     def sqlite_close(self,conn):
         return conn.close()

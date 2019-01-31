@@ -160,17 +160,5 @@ class ZabbixHosts(JSRPCQuery):
         format_print.print_load(title=title, content=content, status=status)
 
 
-
-
-
-zabbix_hosts = ZabbixHosts()
-host = 'test-zabbix1'
-# groupid = "320"
-groupid = ["320","307"]
-# templateid = ["10778","10248"]
-templateid = ["10001","10788"]
-# zabbix_hosts.add_hosts(host=host,groupid=groupid,check=False,templateid=templateid)
-# print(a.get_customer_hosts())
-hostsids = ["10876","10877"]
-zabbix_hosts.delete_hosts(hostsids=hostsids,check=False)
-
+Zabbix = ZabbixHosts()
+print(Zabbix.get_all_hosts())
