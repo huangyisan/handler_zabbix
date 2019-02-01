@@ -66,7 +66,7 @@ Zabbix_Hosts
     5
     ```
     
-* **添加单个host** `add_hosts`
+* **添加单个host** `create_hosts`
 
   * 参数
     

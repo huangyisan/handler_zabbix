@@ -76,7 +76,7 @@ class ZabbixHosts(JSRPCQuery):
 
         return self._action_hosts(payload)
 
-    def add_host(self,host,groupid,templateid,_type=1,main=1,useip=1,ip='127.0.0.1',dns="",port="10050",check=True):
+    def create_host(self,host,groupid,templateid,_type=1,main=1,useip=1,ip='127.0.0.1',dns="",port="10050",check=True):
         '''
 
         :param host: 待添加主机名称
