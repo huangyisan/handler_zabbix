@@ -95,6 +95,7 @@ class ZabbixHosts(JSRPCQuery):
         templateid = list(map(lambda x:{"templateid":x},templateid))
 
 
+
         if isinstance(ip,str) and isinstance(dns,str) and isinstance(port, str):
 
             interfaces = {

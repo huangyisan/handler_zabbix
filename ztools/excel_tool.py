@@ -1,16 +1,8 @@
 import pandas as pd
-import numpy as np
 import platform
 import os
 import sys
-from enum import Enum,unique
-
-@unique
-class HostInterfaceMain(Enum):
-    agent = 1
-    SNMP = 2
-    IPMI = 3
-    JMX = 4
+from ztools.format_print import print_load
 
 class Excel(object):
 
@@ -49,7 +41,15 @@ class Excel(object):
         }
 
         df = pd.read_excel(self.expath,sheet_name='Sheet1')
-        print(df.columns)
+
+        # 判断excel中是否存在空
+        if df.isnull().any().sum():
+            title = "Read excel content error!"
+            content = "Some cells are not filled in"
+            status = "error"
+            print_load(title, content, status)
+            sys.exit(1)
+
         for i in df.index:
             try:
                 hostname = df['hostname'][i]
@@ -66,13 +66,19 @@ class Excel(object):
                 print(e)
                 sys.exit(1)
 
-            # s = pd.Series([2, 3, np.nan, 7, "The Hobbit"])
-            # print(s.isnull())
-
             ex_list = [hostname, groupname, templatename, interface_type, maint_ype, useip, ip, dns, port, check]
 
-            # yield ex_list
+
+            # get groupid via groupname
+
+            # get templateid via templatename
+
             print(ex_list)
+
+
+            # ex_list = [hostname, groupname, templatename, interface_type, maint_ype, useip, ip, dns, port, check]
+
+            # yield ex_list
 
 a = Excel(exname='my.xlsx')
 a.get_multi_hosts_values()
