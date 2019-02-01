@@ -48,30 +48,28 @@ class Excel(object):
             'ip': 1
         }
 
-        #
-        _dns = {
-            'nan':""
-        }
-
         df = pd.read_excel(self.expath,sheet_name='Sheet1')
         print(df.columns)
         for i in df.index:
-            hostname = df['hostname'][i]
-            groupname = df['groupname'][i]
-            templatename = df['templatename'][i]
-            interface_type = _type[df['interface type'][i]]
-            _main = _main[df['main'][i]]
-            useip = _useip[df['useip'][i]]
-            ip = df['ip'][i]
-            dns = df['dns'][i]
-            port = df['port'][i]
-            check = df['check'][i]
-
             try:
-                ex_list = [hostname,groupname,templatename,interface_type,_main,useip,ip,dns,port,check]
+                hostname = df['hostname'][i]
+                groupname = df['groupname'][i]
+                templatename = df['templatename'][i]
+                interface_type = _type[df['interface type'][i]]
+                maint_ype = _main[df['main'][i]]
+                useip = _useip[df['useip'][i]]
+                ip = df['ip'][i]
+                dns = df['dns'][i]
+                port = df['port'][i]
+                check = df['check'][i]
             except KeyError as e:
                 print(e)
                 sys.exit(1)
+
+            # s = pd.Series([2, 3, np.nan, 7, "The Hobbit"])
+            # print(s.isnull())
+
+            ex_list = [hostname, groupname, templatename, interface_type, maint_ype, useip, ip, dns, port, check]
 
             # yield ex_list
             print(ex_list)
