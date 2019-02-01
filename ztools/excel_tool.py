@@ -52,6 +52,9 @@ class Excel(object):
             print_load(title, content, status)
             sys.exit(1)
 
+        # 存放groupid和templateid，如果有，则直接从字典取，没有，则调接口
+        groupid_templateid_dict = {}
+
         for i in df.index:
             try:
                 hostname = df['hostname'][i]
@@ -71,14 +74,21 @@ class Excel(object):
             # get groupid via groupname
             zhg = ZabbixHostGroups()
             output_data = ["groupid"]
-            # print(templatename)
-            groupid = zhg.get_customer_hostgroups(name=groupname,output_data=output_data)
+            groupid = groupid_templateid_dict.get("".join(groupname))
+            if groupid:
+                pass
+            else:
+                groupid = groupid_templateid_dict.setdefault("".join(groupname),zhg.get_customer_hostgroups(name=groupname,output_data=output_data))
             groupname = [i.get("groupid") for i in groupid]
 
             # get templateid via templatename
             zt = ZabbixTemplates()
             output_data = ["templateid"]
-            templateid = zt.get_template_id(templatename=templatename,output_data=output_data)
+            templateid = groupid_templateid_dict.get("".join(templatename))
+            if templateid:
+                pass
+            else:
+                templateid = groupid_templateid_dict.setdefault("".join(templatename),zt.get_template_id(templatename=templatename,output_data=output_data))
             templatename = [i.get('templateid') for i in templateid]
 
             ex_list = [hostname, groupname, templatename, interface_type, maint_ype, useip, ip, dns, port, check]
