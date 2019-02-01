@@ -3,6 +3,7 @@ import platform
 import os
 import sys
 from ztools.format_print import print_load
+from Zabbix_Hostgroups.zabbix_handler_hostgroups import ZabbixHostGroups
 
 class Excel(object):
 
@@ -53,8 +54,8 @@ class Excel(object):
         for i in df.index:
             try:
                 hostname = df['hostname'][i]
-                groupname = df['groupname'][i]
-                templatename = df['templatename'][i]
+                groupname = df['groupname'][i].split(" ")
+                templatename = df['templatename'][i].split(" ")
                 interface_type = _type[df['interface type'][i]]
                 maint_ype = _main[df['main'][i]]
                 useip = _useip[df['useip'][i]]
@@ -66,15 +67,19 @@ class Excel(object):
                 print(e)
                 sys.exit(1)
 
-            ex_list = [hostname, groupname, templatename, interface_type, maint_ype, useip, ip, dns, port, check]
-
-
             # get groupid via groupname
+            zhg = ZabbixHostGroups()
+            output_data = ["groupid"]
+            # print(templatename)
+            groupid = zhg.get_customer_hostgroups(name=groupname,output_data=output_data)
+
+            groupname = [i.get("groupid") for i in groupid]
 
             # get templateid via templatename
 
-            print(ex_list)
+            ex_list = [hostname, groupname, templatename, interface_type, maint_ype, useip, ip, dns, port, check]
 
+            print(ex_list)
 
             # ex_list = [hostname, groupname, templatename, interface_type, maint_ype, useip, ip, dns, port, check]
 

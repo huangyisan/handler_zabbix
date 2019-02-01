@@ -27,7 +27,6 @@ class ZabbixLogin(JSRPCQuery):
         if token_sqlite.sqlite_select(conn, _select_token_table_sql, (Sqlite().get_table_name,)) == 1 and token_sqlite.sqlite_select(conn=conn, sql=_select_token_sql):
             token = token_sqlite.sqlite_select(conn=conn, sql=_select_token_sql)
             token_sqlite.sqlite_close(conn)
-            print(token)
             return token
 
         # 判断token table是否存在，不存在这创建表，并且插入token到表中
@@ -36,7 +35,6 @@ class ZabbixLogin(JSRPCQuery):
             token = self.get_token_via_api()
             token_sqlite.sqlite_execute(conn, _insert_token_sql,(token,))
             token_sqlite.sqlite_close(conn)
-            print(token)
             return token
 
         # 如果不存在token，则插入token
@@ -44,6 +42,5 @@ class ZabbixLogin(JSRPCQuery):
             token = self.get_token_via_api()
             token_sqlite.sqlite_execute(conn, _insert_token_sql, (token,))
             token_sqlite.sqlite_close(conn)
-            print(token)
             return token
 

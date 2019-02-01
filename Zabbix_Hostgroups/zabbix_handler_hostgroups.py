@@ -26,6 +26,6 @@ class ZabbixHostGroups(JSRPCQuery):
 
         return self._action_hostgroup(payload)
 
-zabbix_hostgroups = ZabbixHostGroups()
-name = ['test-zabbix','DNS-lts']
-print(zabbix_hostgroups.get_customer_hostgroups(name=name))
+# zabbix_hostgroups = ZabbixHostGroups()
+# name = ['test-zabbix','DNS-lts']
+# print(zabbix_hostgroups.get_customer_hostgroups(name=name))
