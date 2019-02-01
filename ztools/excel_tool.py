@@ -1,4 +1,4 @@
-import xlwings as xw
+import pandas as pd
 import platform
 import os
 
@@ -17,8 +17,14 @@ class Excel(object):
             return expath + '/' + 'excels' + '/' + self.exname
 
     def get_multi_hosts_values(self):
-        wb = xw.Book(self.expath)
-        sht = wb.sheets['Sheet1']
-        A1 = sht.range('A1').value
-        print(A1)
+        df = pd.read_excel(self.expath,sheet_name='Sheet1')
+        # print(df.columns)
+        print(df['hostname'][0])
+        for i in df.index:
+            print(df['hostname'][i])
 
+
+
+
+a = Excel(exname='my.xlsx')
+a.get_multi_hosts_values()
