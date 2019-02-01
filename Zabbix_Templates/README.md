@@ -3,13 +3,16 @@ Zabbix_templates
 - 获取指定template名称对应id `get_template_id`
 ```
 template = ZabbixTemplates()
-print(template.get_template_id(templatename='Flume_Process_Running_Check'))
+templatename = ['Flume_Process_Running_Check','DNS OS Linux']
+print(template.get_template_id(templatename=templatename))
 
 output:
-10836
+[{'templateid': '10832', 'host': 'DNS OS Linux'}, {'templateid': '10836', 'host': 'Flume_Process_Running_Check'}]
 ```
 
 - 批量关联hosts和template `mass_add_templates`
+
+## 该功能可能异常
 
 ```
 mass_template = ZabbixTemplates()

@@ -1,15 +1,13 @@
 from Zabbix_Login.zabbix_handler_login import ZabbixLogin
 
-def get_template_payload(templatename):
+def get_template_payload(templatename,output_data):
     get_template_payload = {
         "jsonrpc": "2.0",
         "method": "template.get",
         "params": {
-            "output": ["templateid"],
+            "output": output_data,
             "filter": {
-                "host": [
-                    templatename,
-                ]
+                "host": templatename,
             }
         },
         "auth": "{0}".format(ZabbixLogin().get_token()),
