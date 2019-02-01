@@ -1,6 +1,7 @@
 from Zabbix_JSRPC.zabbix_jsrpc_query import JSRPCQuery
 from Zabbix_Payloads import zabbix_hosts_info
 from ztools import format_print
+from ztools.excel_tool import Excel
 
 class ZabbixHosts(JSRPCQuery):
 
@@ -76,7 +77,7 @@ class ZabbixHosts(JSRPCQuery):
 
         return self._action_hosts(payload)
 
-    def create_host(self,host,groupid,templateid,_type=1,main=1,useip=1,ip='127.0.0.1',dns="",port="10050",check=True):
+    def create_host(self,host,groupid,templateid,_type=1,_main=1,useip=1,ip='127.0.0.1',dns="",port="10050",check=True):
         '''
 
         :param host: 待添加主机名称
@@ -93,14 +94,13 @@ class ZabbixHosts(JSRPCQuery):
         '''
         groupid = list(map(lambda x:{"groupid":x},groupid))
         templateid = list(map(lambda x:{"templateid":x},templateid))
+        port = str(port)
 
-
-
-        if isinstance(ip,str) and isinstance(dns,str) and isinstance(port, str):
+        if isinstance(ip,str) and isinstance(dns,str):
 
             interfaces = {
                 "type": _type,
-                "main": main,
+                "main": _main,
                 "useip": useip,
                 "ip": ip,
                 "dns": dns,
@@ -123,9 +123,17 @@ class ZabbixHosts(JSRPCQuery):
                     content = '{0}\nThe payload is:\n{1}'.format(recall.get("data"),payload)
                     status = "error"
                     format_print.print_load(title=title, content=content, status=status)
+        else:
+            print("error")
 
-    def add_multi_host(self):
-        pass
+    def add_multi_host(self,exname):
+        exname = exname
+        excel = Excel(exname)
+        content = excel.get_multi_hosts_values()
+        for line in content:
+            host,groupid,templateid,_type,_main,useip,ip,dns,port,check = line
+            self.create_host(host=host, groupid=groupid, templateid=templateid, _type=_type, _main=_main, useip=useip, ip=ip, dns=dns, port=port,check=check)
+
 
     def delete_hosts(self,hostsids,check=True):
         '''
@@ -162,3 +170,8 @@ class ZabbixHosts(JSRPCQuery):
         content = 'The payload is: \n{payload}'.format(payload=payload)
         status = "warning"
         format_print.print_load(title=title, content=content, status=status)
+
+
+a = ZabbixHosts()
+exname = 'my.xlsx'
+a.add_multi_host(exname=exname)

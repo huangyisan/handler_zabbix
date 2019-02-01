@@ -1,3 +1,5 @@
+import sys
+
 def print_load(title, content, status):
     Asterisk = '*'
 
@@ -32,6 +34,10 @@ def print_load(title, content, status):
 
     elif status.lower() == "error":
         print(Asterisk + '\n' + error + title + '\n' + Asterisk + '\n' + reason + content)
+
+        # exit when error
+        sys.exit(1)
+
 
     else:
         print(Asterisk + '\n' + title + '\n' + Asterisk + '\n' + content)

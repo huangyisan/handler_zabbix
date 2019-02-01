@@ -42,6 +42,8 @@ class Excel(object):
             'ip': 1
         }
 
+
+
         df = pd.read_excel(self.expath,sheet_name='Sheet1')
 
         # 判断excel中是否存在空
@@ -96,9 +98,4 @@ class Excel(object):
 
             ex_list = [hostname, groupname, templatename, interface_type, maint_ype, useip, ip, dns, port, check]
 
-            print(ex_list)
-
-            # yield ex_list
-
-a = Excel(exname='my.xlsx')
-a.get_multi_hosts_values()
+            yield ex_list
