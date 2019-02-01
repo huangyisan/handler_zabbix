@@ -74,22 +74,24 @@ class Excel(object):
             # get groupid via groupname
             zhg = ZabbixHostGroups()
             output_data = ["groupid"]
-            # 将所有groupame连接为一个groupname来存入字典。n
-            groupid = groupid_templateid_dict.get("".join(groupname))
+            # 将所有groupame连接为一个groupname来存入字典。
+            tmp_groupname = "".join(groupname)
+            groupid = groupid_templateid_dict.get(tmp_groupname)
             if groupid:
                 pass
             else:
-                groupid = groupid_templateid_dict.setdefault("".join(groupname),zhg.get_customer_hostgroups(name=groupname,output_data=output_data))
+                groupid = groupid_templateid_dict.setdefault(tmp_groupname,zhg.get_customer_hostgroups(name=groupname,output_data=output_data))
             groupname = [i.get("groupid") for i in groupid]
 
             # get templateid via templatename
             zt = ZabbixTemplates()
             output_data = ["templateid"]
-            templateid = groupid_templateid_dict.get("".join(templatename))
+            tmp_templatename = "".join(templatename)
+            templateid = groupid_templateid_dict.get(tmp_templatename)
             if templateid:
                 pass
             else:
-                templateid = groupid_templateid_dict.setdefault("".join(templatename),zt.get_template_id(templatename=templatename,output_data=output_data))
+                templateid = groupid_templateid_dict.setdefault(tmp_templatename,zt.get_template_id(templatename=templatename,output_data=output_data))
             templatename = [i.get('templateid') for i in templateid]
 
             ex_list = [hostname, groupname, templatename, interface_type, maint_ype, useip, ip, dns, port, check]
