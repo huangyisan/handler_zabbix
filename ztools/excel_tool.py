@@ -74,6 +74,7 @@ class Excel(object):
             # get groupid via groupname
             zhg = ZabbixHostGroups()
             output_data = ["groupid"]
+            # 将所有groupame连接为一个groupname来存入字典。n
             groupid = groupid_templateid_dict.get("".join(groupname))
             if groupid:
                 pass
