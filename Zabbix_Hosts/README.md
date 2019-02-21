@@ -66,7 +66,7 @@ Zabbix_Hosts
     5
     ```
     
-* **添加单个host** `create_hosts`
+* **添加单个host** `create_host`
 
   * 参数
     
@@ -97,6 +97,21 @@ Zabbix_Hosts
     Recall Message:
     {'hostids': ['10873']}
   ```
+
+* **添加多个hosts** add_multi_hosts
+    
+    * 参数
+    
+      - exname: excel名称(存放ztools/excels下，每行都需要填写，不可以为空)
+     
+    * 样例
+    
+    ```
+    a = ZabbixHosts()
+    exname = 'my.xlsx'
+    a.add_multi_hosts(exname=exname)
+
+    ```
   
 * **删除hosts** `delete_hosts`
 

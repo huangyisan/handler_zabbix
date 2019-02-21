@@ -126,7 +126,12 @@ class ZabbixHosts(JSRPCQuery):
         else:
             print("error")
 
-    def add_multi_host(self,exname):
+    def add_multi_hosts(self,exname):
+        '''
+
+        :param exname:  excel name
+        :return:
+        '''
         exname = exname
         excel = Excel(exname)
         content = excel.get_multi_hosts_values()
@@ -172,6 +177,6 @@ class ZabbixHosts(JSRPCQuery):
         format_print.print_load(title=title, content=content, status=status)
 
 
-a = ZabbixHosts()
-exname = 'my.xlsx'
-a.add_multi_host(exname=exname)
+# a = ZabbixHosts()
+# exname = 'my.xlsx'
+# a.add_multi_hosts(exname=exname)
